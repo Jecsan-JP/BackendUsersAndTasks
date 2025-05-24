@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // Versión de JavaScript a la que compilar
+    "module": "commonjs", // Sistema de módulos a usar
+    "lib": ["ES2020"], // Librerías disponibles
+    "outDir": "./dist", // Carpeta donde se guardarán los archivos compilados
+    "rootDir": "./src", // Carpeta fuente de los archivos TypeScript
+    "strict": true, // Habilita todas las verificaciones de tipo estrictas
+    "esModuleInterop": true, // Permite importar módulos CommonJS como módulos ES
+    "skipLibCheck": true, // Omite la verificación de tipos en archivos de declaración
+    "forceConsistentCasingInFileNames": true, // Fuerza el uso consistente de mayúsculas/minúsculas
+    "moduleResolution": "node", // Estrategia de resolución de módulos
+    "resolveJsonModule": true, // Permite importar archivos JSON
+    "baseUrl": ".", // Directorio base para resolver módulos no relativos
+    "paths": {
+      // Mapeo de rutas para importaciones
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*"], // Archivos a incluir en la compilación
+  "exclude": ["node_modules", "dist", "tests"] // Archivos a excluir
+}
