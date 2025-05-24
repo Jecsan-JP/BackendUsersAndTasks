@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import routes from "@/routes";
 import { errorHandler } from "@/middlewares/errorHandler";
 import { responseMiddleware } from "@/middlewares/response.middleware";
+import routes from "@/routes";
 
 export const createExpressApp = () => {
   const app = express();
