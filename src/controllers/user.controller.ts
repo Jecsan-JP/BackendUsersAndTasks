@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
-import { DatabaseError } from "@/errors/errors";
-import { ValidationError } from "@/errors/errors";
+import { DatabaseError } from "../errors/errors";
+import { ValidationError } from "../errors/errors";
 import { Request, Response, NextFunction } from "express";
-import User from "@/models/user.model";
-import { generateToken } from "@/utils/jwt.util";
+import User from "../models/user.model";
+import { generateToken } from "../utils/jwt.util";
 
 export const createUser = async (
   req: Request,

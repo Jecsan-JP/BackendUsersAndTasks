@@ -1,7 +1,7 @@
-import { DatabaseError, ValidationError } from "@/errors/errors";
+import { DatabaseError, ValidationError } from "../errors/errors";
 import { NextFunction, Request, Response } from "express";
-import Task from "@/models/task.model";
-import Comment from "@/models/comment.model";
+import Task from "../models/task.model";
+import Comment from "../models/comment.model";
 
 export const createTask = async (
   req: Request,

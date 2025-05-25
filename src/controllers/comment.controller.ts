@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import Comment from "@/models/comment.model";
-import Task from "@/models/task.model";
-import { DatabaseError, ValidationError } from "@/errors/errors";
+import Comment from "../models/comment.model";
+import Task from "../models/task.model";
+import { DatabaseError, ValidationError } from "../errors/errors";
 
 // Crear comentario en una tarea principal
 export const createComment = async (
