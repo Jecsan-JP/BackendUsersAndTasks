@@ -58,6 +58,7 @@ export const getCommentsByTask = async (
     }
 
     const comments = await Comment.find({ taskId, userId });
+
     res.json({ comments });
   } catch (error: any) {
     next(new DatabaseError("find", { message: error.message }));
