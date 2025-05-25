@@ -6,7 +6,7 @@ import {
   TooManyRequestsError,
   UnauthorizedError,
   ValidationError,
-} from "@/errors/errors";
+} from "../errors/errors";
 
 export class BaseResponse<DATA> {
   statusCode: number = 200;

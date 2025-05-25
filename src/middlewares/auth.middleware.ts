@@ -1,6 +1,6 @@
-import { verifyToken } from "@/utils/jwt.util";
+import { verifyToken } from "../utils/jwt.util";
 import { Request, Response, NextFunction } from "express";
-import { ValidationError } from "@/errors/errors"; // O tu clase de error personalizada
+import { ValidationError } from "../errors/errors"; // O tu clase de error personalizada
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;

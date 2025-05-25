@@ -10,9 +10,9 @@ import {
   TooManyRequestsError,
   UnauthorizedError,
   ValidationError,
-} from "@/errors/errors";
+} from "../errors/errors";
 import mongoose from "mongoose";
-import { BaseResponse } from "@/utils/response.util";
+import { BaseResponse } from "../utils/response.util";
 
 export const errorHandler = (
   err: Error,
