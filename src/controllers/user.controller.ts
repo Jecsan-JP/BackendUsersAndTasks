@@ -31,6 +31,7 @@ export const createUser = async (
     // Crear y guardar el usuario
     const user = new User({ username, password: hashedPassword });
     await user.save();
+    res.json(user);
   } catch (error: any) {
     if (error.name === "ValidationError") {
       next(
