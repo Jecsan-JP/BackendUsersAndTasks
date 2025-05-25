@@ -10,9 +10,9 @@ import {
 const router = Router();
 
 // Crear comentario en una tarea principal
-router.post("/:taskId/comments", authMiddleware, createComment);
+router.post("/:taskId", authMiddleware, createComment);
 // Obtener comentarios de una tarea principal
-router.get("/:taskId/comments", authMiddleware, getCommentsByTask);
+router.get("/:taskId", authMiddleware, getCommentsByTask);
 // Editar comentario
 router.put("/:commentId", authMiddleware, updateComment);
 // Eliminar comentario

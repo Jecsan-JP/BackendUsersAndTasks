@@ -160,10 +160,7 @@ export const loginUser = async (
       { userId: user._id, username: user.username },
       "1h"
     );
-
-    res.locals.data = { token };
-    res.locals.message = "Login exitoso";
-    next();
+    res.json({ token });
   } catch (error: any) {
     next(error);
   }

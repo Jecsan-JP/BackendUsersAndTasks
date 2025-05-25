@@ -21,9 +21,7 @@ export const createTask = async (
     });
     await task.save();
 
-    res.locals.data = task;
-    res.locals.message = "Tarea creada correctamente";
-    next();
+    res.json({ task });
   } catch (error: any) {
     next(new DatabaseError("create", { message: error.message }));
   }
@@ -37,19 +35,24 @@ export const getTasks = async (
 ) => {
   try {
     const userId = (req as any).user.userId;
+    const { status } = req.query;
 
-    // Obtener tareas principales (parentTaskId: null)
-    const mainTasks = await Task.find({ userId, parentTaskId: null }).lean();
+    // Filtro base: tareas principales del usuario
+    const filter: any = { userId, parentTaskId: null };
+    if (status) filter.status = status;
+
+    // Obtener tareas principales (con posible filtro por estatus)
+    const mainTasks = await Task.find(filter).lean();
 
     // Para cada tarea principal, obtener sus subtareas y comentarios
     const tasksWithSubtasksAndComments = await Promise.all(
       mainTasks.map(async (task) => {
-        // Subtareas (sin comentarios)
+        // Subtareas (sin filtro de estatus, pero puedes agregarlo si lo necesitas)
         const subtasks = await Task.find({
           parentTaskId: task._id,
           userId,
         }).lean();
-        // Comentarios solo de la tarea principal
+        // Comentarios de la tarea principal
         const comments = await Comment.find({
           taskId: task._id,
           userId,
@@ -62,8 +65,7 @@ export const getTasks = async (
       })
     );
 
-    res.locals.data = tasksWithSubtasksAndComments;
-    next();
+    res.json({ tasks: tasksWithSubtasksAndComments });
   } catch (error: any) {
     next(new DatabaseError("find", { message: error.message }));
   }
@@ -87,9 +89,7 @@ export const getTaskById = async (
     // Obtener subtareas
     const subtasks = await Task.find({ parentTaskId: id, userId });
 
-    res.locals.data = { task, subtasks };
-    res.locals.message = "Tarea obtenida correctamente";
-    next();
+    res.json({ task, subtasks });
   } catch (error: any) {
     next(new DatabaseError("findById", { message: error.message }));
   }
@@ -131,9 +131,7 @@ export const updateTask = async (
       return next(new ValidationError({ message: "Tarea no encontrada" }));
     }
 
-    res.locals.data = task;
-    res.locals.message = "Tarea actualizada correctamente";
-    next();
+    res.json({ task });
   } catch (error: any) {
     next(new DatabaseError("update", { message: error.message }));
   }
@@ -152,9 +150,7 @@ export const deleteTask = async (
     // Elimina la tarea principal y sus subtareas
     await Task.deleteMany({ $or: [{ _id: id }, { parentTaskId: id }], userId });
 
-    res.locals.data = null;
-    res.locals.message = "Tarea y subtareas eliminadas correctamente";
-    next();
+    res.json({ message: "Tarea y subtareas eliminadas correctamente" });
   } catch (error: any) {
     next(new DatabaseError("delete", { message: error.message }));
   }
